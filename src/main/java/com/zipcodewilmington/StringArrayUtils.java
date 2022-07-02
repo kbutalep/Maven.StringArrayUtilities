@@ -67,7 +67,12 @@ public class StringArrayUtils {
        return reversedS;
     }
 
-//
+//Alternate code for reference
+    //List<String> list = Arrays.asList(array);
+    //Collections.reverse(list);
+    //String[] reversedArray = new String[list.size()];
+    //reversedArray = list.toArray(array);
+    //return reversedArray;
 
 
     /**
@@ -109,8 +114,8 @@ public class StringArrayUtils {
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
         int numOfOccurs = 0;
-        for (String part : array) {
-            if (part.equals(value)) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == value) {
                 numOfOccurs++;
             }
         }
@@ -123,16 +128,35 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+        String[] newRemovedArray = new String[array.length - getNumberOfOccurrences(array, valueToRemove)];
+        int index = 0;
+        for (String part : array) {
+        if(!part.equals(valueToRemove)){
+        newRemovedArray[index] = part;
+        index++;
+        }
+        } return newRemovedArray;
     }
+
 
     /**
      * @param array array of chars
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+
+        ArrayList<String> newArrayNoDupes = new ArrayList<>(Arrays.asList(array));
+        for (int i = 1; i < newArrayNoDupes.size(); i++) {
+            if(newArrayNoDupes.get(i) == newArrayNoDupes.get(i-1)) {
+                newArrayNoDupes.remove(i);
+                i--;
+            }
+        }
+        int newlistsize = newArrayNoDupes.size();
+        String[] finalArray = newArrayNoDupes.toArray(new String[0]);
+        return finalArray;
     }
+
 
     /**
      * @param array array of chars
