@@ -67,17 +67,7 @@ public class StringArrayUtils {
        return reversedS;
     }
 
-//      ***** EXAMPLE****
-//        public static String reverse(String str) {
-//            char[] oldCharArray = str.toCharArray();
-//            char[] newCharArray= new char[oldCharArray.length];
-//            int currentChar = oldCharArray.length-1;
-//            for (char c : oldCharArray) {
-//                newCharArray[currentChar] = c;
-//                currentChar--;
-//            }
-//            return new String(newCharArray);
-//        }
+//
 
 
     /**
@@ -118,7 +108,13 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+        int numOfOccurs = 0;
+        for (String part : array) {
+            if (part.equals(value)) {
+                numOfOccurs++;
+            }
+        }
+        return numOfOccurs;
     }
 
     /**
