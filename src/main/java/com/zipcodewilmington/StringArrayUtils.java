@@ -1,5 +1,9 @@
 package com.zipcodewilmington;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -25,7 +29,7 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
-        return null;
+        return array[(array.length - 1)];
     }
 
     /**
@@ -33,7 +37,7 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return null;
+        return array[(array.length - 2)];
     }
 
     /**
@@ -42,6 +46,10 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
+        for (String newString : array) {
+            if (newString.contains(value)) ;
+            return true;
+        }
         return false;
     }
 
@@ -50,23 +58,58 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        return null;
+      String[] reversedS = new String[array.length];
+      int index = 0;
+      for (int i = array.length -1; i >= 0; i--){
+          reversedS[index] = array[i];
+          index++;
+      }
+       return reversedS;
     }
+
+//      ***** EXAMPLE****
+//        public static String reverse(String str) {
+//            char[] oldCharArray = str.toCharArray();
+//            char[] newCharArray= new char[oldCharArray.length];
+//            int currentChar = oldCharArray.length-1;
+//            for (char c : oldCharArray) {
+//                newCharArray[currentChar] = c;
+//                currentChar--;
+//            }
+//            return new String(newCharArray);
+//        }
+
 
     /**
      * @param array array of String objects
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+        int len = array.length - 1;
+        for (int i = 0; i <= array.length / 2; i++) {
+            if (array[i] != array[len]) {
+                return false;
+            } else {
+                len -= 1;
+            }
+        }
+        return true;
     }
+
 
     /**
      * @param array array of String objects
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+        String[] alphabet = "a b c d e f g h i j k l m n o p q r s t u v w x y z".split(" ");
+        String arrayString = Arrays.toString(array).toLowerCase();
+        for (int i = 0; i <= alphabet.length - 1; i++) {
+            if (!arrayString.contains(alphabet[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -100,8 +143,26 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+
+        ArrayList removed = new ArrayList();
+        for (int i = 0; i < array.length; i++) {
+            if (i + 1 != array.length) {
+                String next = array[i];
+                while (array[i].equals(array[i + 1])) {
+                    next += array[i];
+                    i++;
+                    if (i + 1 == array.length) {
+                        break;
+                    }
+
+                }
+                removed.add(next);
+            } else {
+                removed.add(array[i]);
+            }
+        }
+        String[] combined = new String[removed.size()];
+        removed.toArray(combined);
+        return combined;
     }
-
-
 }
